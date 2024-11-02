@@ -1,0 +1,19 @@
+.header .top,
+.header .bottom {
+  position: relative;
+  height: 10px;
+  background: linear-gradient(141deg, cyan 0%, rebeccapurple 40%, deeppink 90%);
+}
+
+.header h1 {
+  margin: 0;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.header .text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
