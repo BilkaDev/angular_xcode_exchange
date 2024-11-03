@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -6,12 +6,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { tap } from 'rxjs';
 
 import { CurrencyForm } from '../../../core/models/forms.model';
 import { FormsService } from '../../../core/services/forms.service';
 import { MyErrorStateMatcher } from '../../currency.component';
 import { CurrencyService } from '../../services/currency.service';
-import { Subscription } from 'rxjs';
 import { Currency } from '../../../core/models/currency.model';
 
 @Component({
@@ -30,23 +30,16 @@ import { Currency } from '../../../core/models/currency.model';
   templateUrl: './currency-form.component.html',
   styleUrl: './currency-form.component.scss',
 })
-export class CurrencyFormComponent implements OnInit {
+export class CurrencyFormComponent {
   currencyForm: FormGroup<CurrencyForm>;
   matcher = new MyErrorStateMatcher();
   result: Currency | null = null;
-  sub!: Subscription;
 
   constructor(
     private formsService: FormsService,
     private currencyService: CurrencyService
   ) {
     this.currencyForm = this.formsService.initCurrencyForm();
-  }
-
-  ngOnInit(): void {
-    this.sub = this.currencyService.currencyPostResult.subscribe({
-      next: (value) => (this.result = value),
-    });
   }
 
   get controls() {
@@ -59,6 +52,7 @@ export class CurrencyFormComponent implements OnInit {
         name: this.controls.name.getRawValue(),
         currency: this.controls.currencyCode.getRawValue(),
       })
+      .pipe(tap((value) => (this.result = value)))
       .subscribe();
   }
 
