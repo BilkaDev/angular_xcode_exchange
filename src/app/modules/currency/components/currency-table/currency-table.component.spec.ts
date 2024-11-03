@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CurrencyTableComponent } from './currency-table.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('CurrencyTableComponent', () => {
   let component: CurrencyTableComponent;
@@ -9,7 +10,7 @@ describe('CurrencyTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CurrencyTableComponent],
+      imports: [CurrencyTableComponent, HttpClientModule],
       providers: [provideAnimationsAsync()],
     }).compileComponents();
 
@@ -32,13 +33,13 @@ describe('CurrencyTableComponent', () => {
         currency: 'EUR',
         name: 'Jan Nowak',
         date: '2022-01-01T10:00:00.000Z',
-        value: 4.2954,
+        value: '4.2954',
       },
       {
         currency: 'USD',
         name: 'Jan Nowak',
         date: '2022-01-01T10:00:00.000Z',
-        value: 3.7954,
+        value: '3.7954',
       },
     ];
 
@@ -47,13 +48,13 @@ describe('CurrencyTableComponent', () => {
         currency: 'EUR',
         name: 'Jan Nowak',
         date: '2022-01-01T10:00:00.000Z',
-        value: 4.2954,
+        value: '4.2954',
       },
       {
         currency: 'USD',
         name: 'Jan Nowak',
         date: '2022-01-01T10:00:00.000Z',
-        value: 3.7954,
+        value: '3.7954',
       },
     ]);
   });
