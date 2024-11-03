@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CurrencyFormComponent } from './currency-form.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('CurrencyFormComponent', () => {
   let component: CurrencyFormComponent;
@@ -9,7 +10,7 @@ describe('CurrencyFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CurrencyFormComponent],
+      imports: [CurrencyFormComponent, HttpClientModule],
       providers: [provideAnimationsAsync()],
     }).compileComponents();
 
