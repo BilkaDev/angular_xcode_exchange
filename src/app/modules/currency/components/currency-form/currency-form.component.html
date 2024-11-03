@@ -22,7 +22,7 @@
     </div>
     <div class="currency-row">
       <div class="actions">
-        <button [disabled]="controls.name.invalid" color="primary" type="submit"
+        <button [disabled]="controls.name.invalid || controls.currencyCode.invalid" color="primary" type="submit"
                 mat-flat-button>Sprawdź
         </button>
       </div>
