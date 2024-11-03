@@ -1,4 +1,4 @@
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<mat-table [dataSource]="dataSource ?? []" class="mat-elevation-z8">
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef> Imie i nazwisko</mat-header-cell>
     <mat-cell *matCellDef="let element"> {{ element.name }}</mat-cell>

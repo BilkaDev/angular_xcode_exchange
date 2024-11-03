@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -11,6 +11,10 @@ import {
   MatRowDef,
   MatTable,
 } from '@angular/material/table';
+import { Requests } from '../../../core/models/requests.model';
+import { Subscription } from 'rxjs';
+import { CurrencyService } from '../../services/currency.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-currency-table',
@@ -26,25 +30,26 @@ import {
     MatRowDef,
     MatTable,
     MatHeaderCellDef,
+    NgIf,
   ],
   templateUrl: './currency-table.component.html',
   styleUrl: './currency-table.component.scss',
 })
-export class CurrencyTableComponent {
+export class CurrencyTableComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['name', 'currency', 'value', 'date'];
+  dataSource: Requests[] | null = null;
+  sub!: Subscription;
 
-  dataSource = [
-    {
-      currency: 'EUR',
-      name: 'Jan Nowak',
-      date: '2022-01-01T10:00:00.000Z',
-      value: 4.2954,
-    },
-    {
-      currency: 'USD',
-      name: 'Jan Nowak',
-      date: '2022-01-01T10:00:00.000Z',
-      value: 3.7954,
-    },
-  ];
+  constructor(private currencyService: CurrencyService) {}
+
+  ngOnInit(): void {
+    this.currencyService.getRequestsDetail().subscribe();
+    this.sub = this.currencyService.requestsResult.subscribe({
+      next: (value) => (this.dataSource = value),
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { tap } from 'rxjs';
+import { finalize, tap } from 'rxjs';
 
 import { CurrencyForm } from '../../../core/models/forms.model';
 import { FormsService } from '../../../core/services/forms.service';
@@ -52,7 +52,10 @@ export class CurrencyFormComponent {
         name: this.controls.name.getRawValue(),
         currency: this.controls.currencyCode.getRawValue(),
       })
-      .pipe(tap((value) => (this.result = value)))
+      .pipe(
+        tap((value) => (this.result = value)),
+        finalize(() => this.currencyService.getRequestsDetail().subscribe())
+      )
       .subscribe();
   }
 
