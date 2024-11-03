@@ -1,0 +1,30 @@
+.form-section {
+  display: flex;
+  flex-direction: column;
+  .form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .currency-inputs {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      .name-form-field {
+        width: 70%;
+      }
+      .currency-form-field {
+        width: 30%;
+      }
+    }
+    .currency-row {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+    }
+  }
+}
+
+

@@ -1,0 +1,34 @@
+<div class="form-section">
+  <form [formGroup]="currencyForm" class="form" (ngSubmit)="onSubmit()">
+    <div class="currency-inputs">
+      <mat-form-field class="name-form-field">
+        <mat-label>Imię i nazwisko:</mat-label>
+        <input type="text" matInput [formControl]="controls.name" [errorStateMatcher]="matcher"
+               placeholder="">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="clearName()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="controls.name.invalid">{{ getErrorMessage(controls.name) }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="currency-form-field">
+        <mat-label>Waluta:</mat-label>
+        <input type="text" matInput [formControl]="controls.currencyCode" [errorStateMatcher]="matcher"
+               placeholder="">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="clearName()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="controls.currencyCode.invalid">{{ getErrorMessage(controls.currencyCode) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="currency-row">
+      <div class="actions">
+        <button [disabled]="controls.name.invalid" color="primary" type="submit"
+                mat-flat-button>Sprawdź
+        </button>
+      </div>
+      <div *ngIf="result">
+        <p>Kurs: {{ result }}</p>
+      </div>
+    </div>
+  </form>
+</div>
