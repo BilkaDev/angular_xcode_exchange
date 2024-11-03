@@ -15,6 +15,7 @@ import { Requests } from '../../../core/models/requests.model';
 import { Subscription } from 'rxjs';
 import { CurrencyService } from '../../services/currency.service';
 import { NgIf } from '@angular/common';
+import { DatePipe } from '../../../core/pipes/date.pipe';
 
 @Component({
   selector: 'app-currency-table',
@@ -31,6 +32,7 @@ import { NgIf } from '@angular/common';
     MatTable,
     MatHeaderCellDef,
     NgIf,
+    DatePipe,
   ],
   templateUrl: './currency-table.component.html',
   styleUrl: './currency-table.component.scss',
